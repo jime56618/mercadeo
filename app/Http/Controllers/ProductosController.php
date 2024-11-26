@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProductoModel;
+use App\Models\ProductosModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
-class ProductoController extends Controller
+class ProductosController extends Controller
 {
     public function Listado(){
 
@@ -17,14 +17,14 @@ class ProductoController extends Controller
 
             //return ProductoModel::all();
         //}
-        $producto = ProductoModel::all();
+        $producto = ProductosModel::all();
 
         return response()->json($producto);
 
     }
 
     public function obtenerProdcutoporId($id){
-            return ProductoModel::find($id);
+            return ProductosModel::find($id);
     }
 
     public function agregarProducto(Request $request)
@@ -36,7 +36,7 @@ class ProductoController extends Controller
             $image->move(public_path().'/assets/',$imagenName);
             $path ='http://127.0.0.1:8000/assets/'.$imagenName;
         }
-        $productoGuardado=ProductoModel::create([
+        $productoGuardado=ProductosModel::create([
             'nombre' =>$request->nombre,
             'descripcion' =>$request->descripcion,
             'imagen' =>$path,
@@ -58,7 +58,7 @@ class ProductoController extends Controller
 
     public function eliminar($id)
     {
-        $product = ProductoModel::find($id);
+        $product = ProductosModel::find($id);
         if (!$product) {
             return "Producto no encontrado";
         }
@@ -68,7 +68,7 @@ class ProductoController extends Controller
 
     public function actualizar(Request $request,$id){
         
-        $product=ProductoModel::find($id);
+        $product=ProductosModel::find($id);
         if (!$product){
             return "producto no existe";
         }
